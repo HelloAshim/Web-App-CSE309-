@@ -1,0 +1,45 @@
+body{
+  padding: 25px;
+}
+.title {
+	color: Black;
+}
+.sentence{
+  margin-left: 72px;
+  }
+  
+  .style{
+  font-style: normal;
+  border: 2px solid white;
+  width: 50%;
+  background-color: #E0E0E0;
+  }
+  
+  .color{
+  border: 2px solid white;
+  color: black;
+  width: 60%;
+  background-color: #E5CCFF;
+  }
+  
+  .color1{
+  border: 2px solid white;
+  color: black;
+  width: 60%;
+  background-color: #6666FF;
+  }
+  
+  .color2{
+  border: 2px solid white;
+  color: black;
+  width: 60%;
+  background-color: #FFB266;
+  }
+  
+  .color3{
+  border: 2px solid white;
+  color: black;
+  width: 60%;
+  background-color: #66FF66;
+  }
+  
