@@ -1,0 +1,141 @@
+<html>
+    <head>
+        <title>Send Us a Message</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                display: flex;
+                justify-content: space-between;
+                max-width:  auto;
+                margin: 0px auto;
+                background-color: #ffffff;
+                box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
+                border-radius: 0px;
+                overflow: hidden;
+            }
+            .contact-details {
+                flex: 1;
+                background-image: url("https://rb.gy/ipeck");
+                background-size: cover;
+                background-position: center;
+                color: #ffffff;
+                padding: 30px;
+                text-align: left;
+            }
+                    .contact-details h2 {
+            text-align: center;
+        }
+
+        .contact-details p {
+            margin-bottom: 10px;
+        }
+        .contact-details p:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-details a {
+            color: #749BC2;
+            text-decoration: none;
+        }
+
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+            .contact-form {
+                flex: 1;
+                padding: 30px;
+                background-color: #D8D9DA;
+            }
+            button {
+                padding: 10px 20px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #45a049;
+            }
+                    form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 2px solid #ccc;
+            border-radius: 15px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        input[type="submit"] {
+            background-color: #91C8E4;
+            color: BLACK;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4682A9;
+        }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+     <div class="contact-details">
+        <h2>Contact Details</h2>
+        <p><address><strong>Address</strong></address><br>
+           Mada Center 8th floor, 379 Hudson St. New York, NY 10018 US</p>
+        <p><strong>General Support</strong><br><a href="mailto:ashimsaha040@gmail.com">ashimsaha040@gmail.com</a></p>
+        <p><strong>Let's Talk</strong><br><a href="tel:+11234567890">+1 123-456-7890</a></p>
+    </div>
+
+            <div class="contact-form">
+                <h2 align="center">Send Us a Message</h2>
+        <form action="contact.php" method="POST">
+        <label for="fName">First Name:</label>
+        <input type="text" id="fName" name="fName" required>
+
+        <label for="lName">Last Name:</label>
+        <input type="text" id="lName" name="lName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="6" required></textarea>
+
+        <input type="hidden" name="form_submitted" value="1" />
+
+        <input type="submit" value="Send Message">
+    </form>
+            </div>
+        </div>
+
+    </body>
+</html>
