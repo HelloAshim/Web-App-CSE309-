@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <style>
+        body 
+        {
+            font-family: 'Poppins', sans-serif;
+            background-image: url("https://rb.gy/l224n");
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+            height: 100vh;
+            text-align: center;
+        }
+        .date-container {
+            display: inline-block;
+            width: 200px;
+            height: 400px;
+            vertical-align: top;
+            margin: 10px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+        }
+
+        .date-container h2 {
+            text-align: center;
+        }
+
+        .weather-icon {
+            display: block;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+        }
+    .date-container hr {
+        border: none;
+    }
+    .container {
+            padding: 20px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 300px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .input-group button {
+            padding: 8px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .input-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>5-Day Weather Forecast</h1>
+        <div class="input-group">
+            <input type="text" id="cityInput" placeholder="Enter city name">
+            <button onclick="getWeather()">Get Forecast</button></div>
+            <div id="weatherInfo"></div>
+    </div>
+    <script>
+        const apiKey = 'c36c3d4f715e64907aba33fa659344e5';
+
+        function getWeather() {
+            const cityInput = document.getElementById('cityInput').value;
+            const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${cityInput}&units=metric&appid=${apiKey}`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => displayWeather(data))
+                .catch(error => console.log('Error:', error));
+        }
+
+        function displayWeather(data) {
+            const weatherInfoDiv = document.getElementById('weatherInfo');
+            weatherInfoDiv.innerHTML = '';
+
+            if (data.cod !== '200') {
+                weatherInfoDiv.innerHTML = '<p>Error: City not found</p>';
+                return;
+            }
+
+            const forecastList = data.list;
+            const forecastsFor6AM = forecastList.filter(forecast => {
+                const time = new Date(forecast.dt_txt).getHours();
+                return time === 6;
+            });
+
+            forecastsFor6AM.forEach(forecast => {
+                const dateContainer = document.createElement('div');
+                dateContainer.classList.add('date-container');
+
+                const dateTime = new Date(forecast.dt_txt);
+                const day = getDayOfWeek(dateTime.getDay());
+                const date = dateTime.toLocaleDateString();
+                dateContainer.innerHTML += `
+                    <h2>${day}, ${date}</h2><br>
+                `;
+
+                const temperature = forecast.main.temp;
+                const windSpeed = forecast.wind.speed;
+                const humidity = forecast.main.humidity;
+                const pressure = forecast.main.pressure;
+                const description = forecast.weather[0].description;
+                const iconCode = forecast.weather[0].icon;
+                const iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
+
+                dateContainer.innerHTML += `
+                    <p>Temperature: ${temperature}°C</p>
+                    <p>Wind Speed: ${windSpeed} m/s</p>
+                    <p>Humidity: ${humidity}%</p>
+                    <p>Pressure: ${pressure} hPa</p>
+                    <p>Description: ${description}</p>
+                    <img class="weather-icon" src="${iconUrl}" alt="Weather Icon">
+                    <hr>
+                `;
+
+                weatherInfoDiv.appendChild(dateContainer);
+            });
+        }
+
+        function getDayOfWeek(dayIndex) {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            return days[dayIndex];
+        }
+    </script>
+</body>
+</html>
