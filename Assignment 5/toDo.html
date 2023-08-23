@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tasks</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url("https://rb.gy/tzwwr");
+    }
+    .container {
+        max-width: 500px;
+        margin: 50px auto;
+    }
+    .h1 {
+        color:aqua;
+    }
+    .task-list {
+        list-style: none;
+        padding: 0;
+    }
+.task-item {
+    display: flex;
+    align-items: center;
+    background-color: #fffdfa;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+    .task-item input[type="checkbox"] {
+        margin-right: 10px;
+    }
+    .task-form {
+    margin-bottom: 10px;
+    } 
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center mb-4">To-Do</h1>
+    <div class="task-form">
+        <form action="toDo.php" method="POST" id="new-task" class="d-flex align-items-center">
+            <input id="task" name="task" class="form-control mr-2" autocomplete="off" autofocus placeholder="New Task" type="text">
+            
+            <button class="btn btn-secondary btn-sm" type="submit"><label for="task">Add Task</label></button>
+        </form>
+        
+    </div>
+    <ul class="task-list" id="tasks"></ul>
+</div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskList = document.querySelector('#tasks');
+            const taskInput = document.querySelector('#task');
+            
+            document.querySelector('#new-task').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const taskText = taskInput.value.trim();
+                if (taskText !== '') {
+                    const li = document.createElement('li');
+                    li.className = 'task-item d-flex justify-content-between align-items-center';
+                    li.innerHTML = `
+                        <label class="mb-0">
+                            <input type="checkbox" class="mr-2"> ${taskText}
+                        </label>
+                        <button class="btn btn-sm btn-warning">Delete</button>
+                    `;
+                    taskList.appendChild(li);
+                    taskInput.value = '';
+                }
+            });
+
+            taskList.addEventListener('click', (e) => {
+                if (e.target.classList.contains('btn-warning')) {
+                    e.target.closest('.task-item').remove();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
